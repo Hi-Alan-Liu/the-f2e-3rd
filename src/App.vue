@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/week01">Week01</router-link>
-    </div>
+  <b-container id="app">
     <router-view/>
-  </div>
+  </b-container>
 </template>
 
-<style>
+<style lang="scss">
+@import "~@/assets/scss/vendors/bootstrap-vue/index";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
