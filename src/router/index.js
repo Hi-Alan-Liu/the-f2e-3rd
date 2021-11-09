@@ -1,14 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import week01 from '../views/Week01.vue'
+import Week01 from '../views/Week01.vue'
+import AppLayout from '@/layouts/App.vue';
+import WeekLayout from '@/layouts/Week01/Layout.vue';
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: AppLayout,
+    children: [
+      {
+        path: '',
+        component: Home,
+      },
+    ],
   },
   // {
   //   path: '/about',
@@ -19,9 +27,15 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
   {
-    path: '/week01',
-    name: 'week01',
-    component: week01
+    path: '/Week01',
+    name: 'Week01',
+    component: WeekLayout,
+    children: [
+      {
+        path: '',
+        component: Week01,
+      },
+    ],
   }
 ]
 

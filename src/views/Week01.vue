@@ -10,7 +10,7 @@
 
 <script>
 import axios from 'axios'
-import Card from '@/components/Card.vue'
+import Card from '@/components/Week01/Card.vue'
 export default {
   data() {
     return {
