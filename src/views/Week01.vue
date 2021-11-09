@@ -2,7 +2,7 @@
   <div class="about">
 
     <!-- card -->
-      <Card :itemsData="itemsData" />
+    <Card class="my-4" :itemsData="itemsData" />
     <!-- card -->
 
   </div>
@@ -31,8 +31,8 @@ export default {
         url: `${api_url}/${name}`,
         params: {
           // "$select": "name",
-          "$filter": "Picture/PictureUrl1 ne null",
-          "$top": 5,
+          "$filter": "Picture/PictureUrl1 ne null and Class1 ne null and City ne null and Address ne null and Phone ne null",
+          "$top": 50,
         }
       })
       .then((resp) => {
