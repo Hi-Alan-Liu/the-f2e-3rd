@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="week01">
 
     <!-- card -->
     <Card class="my-4" :itemsData="itemsData" />
@@ -47,3 +47,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.week01 {
+  min-height: 50rem;
+}
+</style>

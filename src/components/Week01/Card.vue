@@ -3,12 +3,14 @@
     <b-row cols="1" cols-sm="2" cols-md="4">
       <b-col v-for="(item, index) in itemsData" :key="index" class="mb-4">
         <b-card no-body>
-            <div class="image-box">
-              <img style="width: 100%" :src='item["Picture"]["PictureUrl1"]'/>
-            </div>
+          <div class="image-box">
+            <img style="width: 100%" :src='item["Picture"]["PictureUrl1"]'/>
+            <b-button variant="light" pill size="sm"><b-icon icon="suit-heart"></b-icon></b-button>
+            <b-button variant="light" pill size="sm"><b-icon icon="suit-heart-fill" variant="danger"></b-icon></b-button>
+          </div>
           <b-card-body style="border-radius 0.75rem;">
-            <b-card-title>{{ item.Name }}</b-card-title>
-            <b-card-sub-title>{{ item.City }}</b-card-sub-title>
+            <b-card-title class="my-1 ">{{ item.Name }}</b-card-title>
+            <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.City }}</u></b-card-sub-title>
             <b-card-text><b-badge v-for="n in 3" :key="n" variant="secondary" class="mr-1">{{ item[`Class${n}`] }}</b-badge></b-card-text>
           </b-card-body>
         </b-card>
@@ -18,16 +20,16 @@
 </template>
 <script>
 export default {
-    data() {
-      return {
-      }
-    },
-    props: {
-        itemsData: {
-            type: Array,
-            required: true
-        }
+  data() {
+    return {
     }
+  },
+  props: {
+    itemsData: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>
 
@@ -54,9 +56,39 @@ export default {
   height: 180px;
 }
 
+.card .image-box button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.card .card-body {
+  padding: 0.75rem 1.25rem;
+}
+
+.card .card-body h6 {
+  color: #007bff !important;
+}
+.card .card-body svg {
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.card .card-body span{
+  padding: 8px 8px 6px 8px;
+  font-size: 12px;
+}
+
+.btn-sm {
+  padding: 0.31rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
 .card:hover {
   background: #fff;
-  box-shadow: 0 6px 12px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 8px 16px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
