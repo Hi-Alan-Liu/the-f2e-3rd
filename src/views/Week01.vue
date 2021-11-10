@@ -1,6 +1,28 @@
 <template>
   <div class="week01">
 
+    <!-- carousel -->
+    <b-carousel
+      id="carousel-fade"
+      style="text-shadow: 0px 0px 2px #000"
+      fade
+      :interval=50000
+    >
+      <b-carousel-slide
+        img-src="../assets/week01/01-background.png"
+      ></b-carousel-slide>
+      <b-carousel-slide
+        img-src="../assets/week01/02-background.png"
+      ></b-carousel-slide>
+      <b-carousel-slide
+        img-src="../assets/week01/03-background.png"
+      ></b-carousel-slide>
+      <b-carousel-slide
+        img-src="../assets/week01/04-background.png"
+      ></b-carousel-slide>
+    </b-carousel>
+    <!-- carousel -->
+
     <!-- card -->
     <Card class="my-4" :itemsData="itemsData" />
     <!-- card -->
