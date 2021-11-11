@@ -3,7 +3,9 @@
     <b-container>
     <NavBar />
 
-    <router-view/>
+    <div class="week01">
+      <router-view/>
+    </div>
 
     </b-container>
     <Footer />
@@ -26,5 +28,9 @@ export default {
 <style scoped>
 #app {
   background: #F1F1F1 0% 0% no-repeat padding-box !important;
+}
+
+.week01 {
+  min-height: 55rem;
 }
 </style>

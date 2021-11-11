@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AppLayout from '@/layouts/App.vue';
 import Week01Layout from '@/layouts/Week01/Layout.vue';
-import Home from '../views/Home.vue'
-import Week01Home from '../views/Week01/Home.vue'
+import Home from '@/views/Home.vue'
+import Week01Home from '@/views/Week01/Home.vue'
+import Week01About from '@/views/Week01/About.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,7 +29,7 @@ const routes = [
   // }
   {
     path: '/Week01',
-    name: 'Week01',
+    name: 'Home',
     component: Week01Layout,
     children: [
       {
@@ -36,6 +37,18 @@ const routes = [
         component: Week01Home,
       },
     ],
+  },
+  {
+    path: '/Week01/:type/:name',
+    name: 'About',
+    component: Week01Layout,
+    children: [
+      {
+        path: '',
+        component: Week01About,
+        props: true,
+      }
+    ]
   }
 ]
 
