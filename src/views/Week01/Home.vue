@@ -23,10 +23,10 @@
 
         <div class="carousel-content">
           <h1 class="mx-3">景點</h1>
-          <b-button class="mx-1 px-3"  pill variant="danger">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
-          <b-button class="mx-1 px-3"  pill variant="light">餐飲<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
-          <b-button class="mx-1 px-3"  pill variant="light">旅宿<b-icon class="ml-2" icon="house-fill"></b-icon></b-button>
-          <b-button class="mx-1 px-3"  pill variant="light">活動<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+          <b-button class="mx-2" pill @click="clickTypeButton(0)" :variant="this.typeButton(0)">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
+          <b-button class="mx-2" pill @click="clickTypeButton(1)" :variant="this.typeButton(1)">餐飲<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+          <b-button class="mx-2" pill @click="clickTypeButton(2)" :variant="this.typeButton(2)">旅宿<b-icon class="ml-2" icon="house-fill"></b-icon></b-button>
+          <b-button class="mx-2" pill @click="clickTypeButton(3)" :variant="this.typeButton(3)">活動<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
         </div>
     </b-carousel>
     <!-- carousel -->
@@ -50,10 +50,11 @@ export default {
     }
   },
   mounted () {
-    this.getItem(this.name[this.type]);
+    this.getItems();
   },
   methods: {
-    getItem(name) {
+    getItems() {
+      let name = this.name[this.type];
       console.log(`${name}`);
       let api_url = 'https://ptx.transportdata.tw/MOTC/v2/Tourism';
       axios({
@@ -61,7 +62,7 @@ export default {
         url: `${api_url}/${name}`,
         params: {
           // "$select": "name",
-          "$filter": "Picture/PictureUrl1 ne null and Class1 ne null and City ne null and Address ne null and Phone ne null",
+          "$filter": "Picture/PictureUrl1 ne null and Address ne null",
           "$top": 50,
         }
       })
@@ -69,7 +70,17 @@ export default {
         console.log(resp.data);
         this.itemsData = resp.data
       });
-
+    },
+    typeButton(type) {
+      if (this.type === type) {
+        return 'danger'
+      } else {
+        return 'light'
+      }
+    },
+    clickTypeButton(type) {
+      this.type = type;
+      this.getItems();
     }
   },
   components: {
@@ -104,5 +115,15 @@ export default {
 .carousel-content svg {
   font-size: 15px;
   margin-bottom: 5px;
+}
+
+.carousel-content button{
+  padding: 9px 18px !important;
+  height: 40px !important;
+  line-height: 22px !important;
+}
+
+.carousel-content .btn-light{
+  color: #959595 !important;
 }
 </style>

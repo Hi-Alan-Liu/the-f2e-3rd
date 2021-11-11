@@ -1,6 +1,6 @@
 <template>
   <!-- card -->
-    <b-row cols="1" cols-sm="2" cols-md="4">
+    <b-row cols="1" cols-md="2" cols-xl="4">
       <b-col v-for="(item, index) in itemsData" :key="index" class="mb-4">
         <b-card no-body>
           <div class="image-box">
@@ -10,8 +10,11 @@
           </div>
           <b-card-body style="border-radius 0.75rem;">
             <b-card-title class="my-1 ">{{ item.Name }}</b-card-title>
-            <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.City }}</u></b-card-sub-title>
-            <b-card-text><b-badge v-for="n in 3" :key="n" variant="secondary" class="mr-1">{{ item[`Class${n}`] }}</b-badge></b-card-text>
+            <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.Address.slice(0, 3) }}</u></b-card-sub-title>
+            <b-card-text>
+              <b-badge v-if="item[`Class1`] == null" variant="secondary" class="m-1">未分類</b-badge>
+              <b-badge v-for="n in 3" :key="n" variant="secondary" class="m-1">{{ item[`Class${n}`] }}</b-badge>
+            </b-card-text>
           </b-card-body>
         </b-card>
       </b-col>
@@ -20,10 +23,6 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-    }
-  },
   props: {
     itemsData: {
       type: Array,
@@ -53,7 +52,8 @@ export default {
   -o-transition:all .9s ease;
   -ms-transition:all .9s ease; 
   width: 100%;
-  height: 180px;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .card .image-box button {
@@ -64,6 +64,7 @@ export default {
 
 .card .card-body {
   padding: 0.75rem 1.25rem;
+  min-height: 120px;
 }
 
 .card .card-body h6 {
@@ -113,8 +114,10 @@ export default {
   font: normal normal normal 14px/19px Roboto;
 }
 
-.card-text {
-  font: normal normal normal 14px/19px Roboto;
+h6 {
+  color: #2A48FF;
+}
+.badge {
   color: #707070;
 }
 </style>
