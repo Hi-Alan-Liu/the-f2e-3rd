@@ -9,16 +9,16 @@
       :interval=500000
     >
       <b-carousel-slide
-        img-src="../assets/week01/01-background.png"
+        img-src="@/assets/week01/01-background.png"
       ></b-carousel-slide>
       <b-carousel-slide
-        img-src="../assets/week01/02-background.png"
+        img-src="@/assets/week01/02-background.png"
       ></b-carousel-slide>
       <b-carousel-slide
-        img-src="../assets/week01/03-background.png"
+        img-src="@/assets/week01/03-background.png"
       ></b-carousel-slide>
       <b-carousel-slide
-        img-src="../assets/week01/04-background.png"
+        img-src="@/assets/week01/04-background.png"
       ></b-carousel-slide>
 
         <div class="carousel-content">
