@@ -3,10 +3,12 @@
 
     <!-- carousel -->
     <b-carousel
+      v-model="type"
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000"
       fade
       :interval=500000
+      @sliding-end="onSlideEnd"
     >
       <b-carousel-slide
         img-src="@/assets/week01/01-background.png"
@@ -80,6 +82,9 @@ export default {
     },
     clickTypeButton(type) {
       this.type = type;
+      this.getItems();
+    },
+    onSlideEnd() {
       this.getItems();
     }
   },
