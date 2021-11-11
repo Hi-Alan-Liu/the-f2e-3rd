@@ -7,12 +7,15 @@
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000"
       fade
-      :interval=500000
+      :interval=0
+      img-height="360"
       @sliding-end="onSlideEnd"
     >
-      <b-carousel-slide
-        img-src="@/assets/week01/01-background.png"
-      ></b-carousel-slide>
+      <b-carousel-slide v-for="n in backgrounds" :key="n">
+        <template v-slot:img>
+          <img class="d-block" height="360" :src=n.src>
+        </template>
+      </b-carousel-slide>
       <b-carousel-slide
         img-src="@/assets/week01/02-background.png"
       ></b-carousel-slide>
@@ -23,18 +26,41 @@
         img-src="@/assets/week01/04-background.png"
       ></b-carousel-slide>
 
-        <div class="carousel-content">
-          <h1 class="mx-3">景點</h1>
-          <b-button class="mx-2" pill @click="clickTypeButton(0)" :variant="this.typeButton(0)">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
-          <b-button class="mx-2" pill @click="clickTypeButton(1)" :variant="this.typeButton(1)">餐飲<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
-          <b-button class="mx-2" pill @click="clickTypeButton(2)" :variant="this.typeButton(2)">旅宿<b-icon class="ml-2" icon="house-fill"></b-icon></b-button>
-          <b-button class="mx-2" pill @click="clickTypeButton(3)" :variant="this.typeButton(3)">活動<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+      <div class="carousel-content w-100">
+        <div style="margin: 7rem;">
+          <h1 class="mx-5">景點</h1>
+          <b-row class="mx-5 type-button">
+            <b-button class="mx-2" pill @click="clickTypeButton(0)" :variant="this.typeButton(0)">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
+            <b-button class="mx-2" pill @click="clickTypeButton(1)" :variant="this.typeButton(1)">餐飲<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+            <b-button class="mx-2" pill @click="clickTypeButton(2)" :variant="this.typeButton(2)">旅宿<b-icon class="ml-2" icon="house-fill"></b-icon></b-button>
+            <b-button class="mx-2" pill @click="clickTypeButton(3)" :variant="this.typeButton(3)">活動<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+          </b-row>
+          <b-row class="mx-4 mt-3 px-3">
+            <b-col cols="5">
+              <b-form-input list="my-list-id" size="lg"></b-form-input>
+              
+              <b-icon icon="x" />
+              <datalist id="my-list-id">
+                <option v-for="city in citys" :key="city.text">{{ city.value }}</option>
+              </datalist>
+            </b-col>
+            <b-col cols="4">
+              <b-form-input v-model="text" placeholder="輸入景點名稱" size="lg"></b-form-input>
+            </b-col> 
+            <b-col>
+              <b-button class="search-button px-4" variant="danger" size="lg"><b-icon class="mr-2" icon="search"></b-icon>搜尋</b-button>
+            </b-col>
+          </b-row>
         </div>
+
+
+      </div>
+
     </b-carousel>
     <!-- carousel -->
 
     <!-- card -->
-    <Card class="my-4" :itemsData="itemsData" />
+    <Card class="my-4" :itemsData="itemsData" :type="typeName" />
     <!-- card -->
 
   </div>
@@ -47,8 +73,39 @@ export default {
   data() {
     return {
       type: 0,
+      typeName: "",
       name: ["ScenicSpot", "Restaurant", "Hotel", "Activity"],
       itemsData: [],
+      backgrounds: [
+        { src : require('@/assets/week01/01-background.png') },
+        { src : require('@/assets/week01/02-background.png') },
+        { src : require('@/assets/week01/03-background.png') },
+        { src : require('@/assets/week01/04-background.png') }                
+      ],
+      citys: [
+        { value: "臺北市", text: "臺北市" },
+        { value: "新北市", text: "新北市" },
+        { value: "桃園市", text: "桃園市" },
+        { value: "臺中市", text: "臺中市" },
+        { value: "臺南市", text: "臺南市" },
+        { value: "高雄市", text: "高雄市" },
+        { value: "新竹縣", text: "新竹縣" },
+        { value: "苗栗縣", text: "苗栗縣" },
+        { value: "彰化縣", text: "彰化縣" },
+        { value: "南投縣", text: "南投縣" },
+        { value: "雲林縣", text: "雲林縣" },
+        { value: "嘉義縣", text: "嘉義縣" },
+        { value: "屏東縣", text: "屏東縣" },
+        { value: "宜蘭縣", text: "宜蘭縣" },
+        { value: "花蓮縣", text: "花蓮縣" },
+        { value: "臺東縣", text: "臺東縣" },
+        { value: "澎湖縣", text: "澎湖縣" },
+        { value: "金門縣", text: "金門縣" },
+        { value: "連江縣", text: "連江縣" },
+        { value: "基隆市", text: "基隆市" },
+        { value: "新竹市", text: "新竹市" },
+        { value: "嘉義市", text: "嘉義市" },
+      ]
     }
   },
   mounted () {
@@ -56,7 +113,8 @@ export default {
   },
   methods: {
     getItems() {
-      let name = this.name[this.type];
+      this.typeName = this.name[this.type];
+      let name = this.typeName;
       console.log(`${name}`);
       let api_url = 'https://ptx.transportdata.tw/MOTC/v2/Tourism';
       axios({
@@ -102,8 +160,6 @@ export default {
 .carousel-content {
   position: absolute;
   z-index: 1;
-  left: 10rem;
-  top: 5rem;
 }
 
 .carousel-content h1{
@@ -122,13 +178,18 @@ export default {
   margin-bottom: 5px;
 }
 
-.carousel-content button{
+.carousel-content .type-button button {
   padding: 9px 18px !important;
   height: 40px !important;
   line-height: 22px !important;
+  float: left;
 }
 
-.carousel-content .btn-light{
+.carousel-content .btn-light {
   color: #959595 !important;
+}
+
+.carousel-content .search-button {
+  float: left;
 }
 </style>

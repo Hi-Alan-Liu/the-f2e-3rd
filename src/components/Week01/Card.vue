@@ -3,19 +3,21 @@
     <b-row cols="1" cols-md="2" cols-xl="4">
       <b-col v-for="(item, index) in itemsData" :key="index" class="mb-4">
         <b-card no-body>
-          <div class="image-box">
-            <img style="width: 100%" :src='item["Picture"]["PictureUrl1"]'/>
-            <b-button variant="light" pill size="sm"><b-icon icon="suit-heart"></b-icon></b-button>
-            <b-button variant="light" pill size="sm"><b-icon icon="suit-heart-fill" variant="danger"></b-icon></b-button>
-          </div>
-          <b-card-body style="border-radius 0.75rem;">
-            <b-card-title class="my-1 ">{{ item.Name }}</b-card-title>
-            <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.Address.slice(0, 3) }}</u></b-card-sub-title>
-            <b-card-text>
-              <b-badge v-if="item[`Class1`] == null" variant="secondary" class="m-1">未分類</b-badge>
-              <b-badge v-for="n in 3" :key="n" variant="secondary" class="m-1">{{ item[`Class${n}`] }}</b-badge>
-            </b-card-text>
-          </b-card-body>
+          <router-link tag="div" :to=getUrl(item.Name)>
+            <div class="image-box">
+              <img style="width: 100%" :src='item["Picture"]["PictureUrl1"]'/>
+              <!-- <b-button variant="light" pill size="sm"><b-icon icon="suit-heart"></b-icon></b-button>
+              <b-button variant="light" pill size="sm"><b-icon icon="suit-heart-fill" variant="danger"></b-icon></b-button> -->
+            </div>
+            <b-card-body style="border-radius 0.75rem;">
+              <b-card-title class="my-1 ">{{ item.Name }}</b-card-title>
+              <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.Address.slice(0, 3) }}</u></b-card-sub-title>
+              <b-card-text>
+                <b-badge v-if="item[`Class1`] == null" variant="secondary" class="m-1">未分類</b-badge>
+                <b-badge v-for="n in 3" :key="n" variant="secondary" class="m-1">{{ item[`Class${n}`] }}</b-badge>
+              </b-card-text>
+            </b-card-body>
+          </router-link>
         </b-card>
       </b-col>
     </b-row>
@@ -27,6 +29,15 @@ export default {
     itemsData: {
       type: Array,
       required: true
+    },
+    type: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    getUrl(name) {
+      return `/week01/${this.type}/${name}`
     }
   }
 }
