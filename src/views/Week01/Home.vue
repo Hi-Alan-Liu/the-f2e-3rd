@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import JsSHA from 'jssha'
 import Card from '@/components/Week01/Card.vue'
 export default {
