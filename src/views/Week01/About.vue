@@ -4,16 +4,16 @@
 
     <!-- carousel -->
     <b-carousel
+      class="d-none d-lg-block"
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000"
       fade
       :interval=0
-      img-height="300"
     >
 
       <b-carousel-slide>
         <template v-slot:img>
-          <img class="d-block" height="300" src="@/assets/week01/02-background.png">
+          <img class="d-block" height="170" src="@/assets/week01/02-background.png">
         </template>
       </b-carousel-slide>
 
@@ -24,7 +24,7 @@
     </b-carousel>
     <!-- carousel -->
 
-    <b-row class="p-5" cols="1" cols-md="1" cols-lg="2">
+    <b-row class="px-5 py-4" cols="1" cols-md="1" cols-lg="2">
       <b-col>
 
       </b-col>
@@ -119,6 +119,12 @@ export default {
 </script>
 
 <style scoped>
+.carousel-item img{
+  width: 100%;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
 .carousel-content {
   position: absolute;
   z-index: 1;
@@ -133,12 +139,15 @@ export default {
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
   line-height: 80px;
-  margin-top: 8rem;
+  margin-top: 4rem;
   padding-left: 6rem;
 }
 
 .card {
+  border-radius: 0.75rem;
   text-align: left;
+  overflow: hidden;
+  border:2px #ffffff00 solid;
 }
 
 .card .card-title {
