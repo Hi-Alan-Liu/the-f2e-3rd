@@ -16,15 +16,6 @@
           <img class="d-block" height="360" :src=n.src>
         </template>
       </b-carousel-slide>
-      <b-carousel-slide
-        img-src="@/assets/week01/02-background.png"
-      ></b-carousel-slide>
-      <b-carousel-slide
-        img-src="@/assets/week01/03-background.png"
-      ></b-carousel-slide>
-      <b-carousel-slide
-        img-src="@/assets/week01/04-background.png"
-      ></b-carousel-slide>
 
       <div class="carousel-content w-100">
         <div style="margin: 7rem;">
