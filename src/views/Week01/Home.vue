@@ -110,24 +110,24 @@ export default {
     getItems() {
       this.typeName = this.name[this.type];
       let name = this.typeName;
-      console.log(`${name}`);
       let api_url = 'https://ptx.transportdata.tw/MOTC/v2/Tourism';
       let filter = 'Picture/PictureUrl1 ne null and Address ne null and City ne null'
       if (this.searchCity != null) {
         filter += ` and city eq '${this.searchCity}'`
       }
-      console.log(filter);
+      if (this.searchText != '') {
+        filter += ` and contains(Name,'${this.searchText}')`
+      }
       axios({
         methods: 'get',
         url: `${api_url}/${name}`,
         params: {
-          // "$select": "name",
           "$filter": filter,
-          "$top": 50,
-        }
+          "$top": 48,
+        },
+         headers: this.getAuthorizationHeader(),
       })
       .then((resp) => {
-        console.log(resp.data);
         this.itemsData = resp.data
       });
     },
@@ -147,8 +147,6 @@ export default {
     },
     clickSearcButton() {
       this.getItems();
-      console.log(`${this.searchCity}`);
-      console.log(`${this.searchText}`);
     },
     getAuthorizationHeader () {
       // API 驗證

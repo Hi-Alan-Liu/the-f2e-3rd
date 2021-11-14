@@ -84,8 +84,6 @@ export default {
   },
   methods: {
     getItemInfo(type, name) {
-      console.log(type);
-      console.log(name);
       let api_url = 'https://ptx.transportdata.tw/MOTC/v2/Tourism';
       let filter =  `Picture/PictureUrl1 ne null and Address ne null and City ne null and name eq '${name}'`;
       axios({
@@ -98,7 +96,6 @@ export default {
       })
       .then((resp) => {
         this.item = resp.data[0];
-        console.log(this.item);
       });
     },
     getMap(address) {
