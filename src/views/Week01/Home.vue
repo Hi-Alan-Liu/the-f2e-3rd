@@ -112,7 +112,7 @@ export default {
       let name = this.typeName;
       let api_url = 'https://ptx.transportdata.tw/MOTC/v2/Tourism';
       let filter = 'Picture/PictureUrl1 ne null and Address ne null and City ne null'
-      if (this.searchCity != null) {
+      if (this.searchCity != null && this.searchCity != '') {
         filter += ` and city eq '${this.searchCity}'`
       }
       if (this.searchText != '') {
