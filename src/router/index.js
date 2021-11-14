@@ -35,6 +35,9 @@ const routes = [
       {
         path: '',
         component: Week01Home,
+        meta: {
+          title: '台灣旅遊景點導覽'
+        }
       },
     ],
   },
@@ -47,6 +50,9 @@ const routes = [
         path: '',
         component: Week01About,
         props: true,
+        meta: {
+          title: '台灣旅遊景點導覽'
+        }
       }
     ]
   }
@@ -56,6 +62,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next();
 })
 
 export default router
