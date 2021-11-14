@@ -5,10 +5,8 @@
     <b-carousel
       v-model="type"
       id="carousel-fade"
-      style="text-shadow: 0px 0px 2px #000"
       fade
       :interval=0
-      img-height="360"
       @sliding-end="onSlideEnd"
     >
       <b-carousel-slide v-for="(n, index) in backgrounds" :key="index">
@@ -17,8 +15,8 @@
         </template>
       </b-carousel-slide>
 
-      <div class="carousel-content w-100">
-        <div style="margin: 7rem;">
+      <b-container>
+        <div class="carousel-content">
           <h1 class="mx-5">景點</h1>
           <b-row class="mx-5 type-button">
             <b-button class="mx-2" pill @click="clickTypeButton(0)" :variant="this.typeButton(0)">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
@@ -42,15 +40,19 @@
             </b-col>
           </b-row>
         </div>
-      </div>
+      </b-container>
 
     </b-carousel>
     <!-- carousel -->
 
-    <!-- card -->
-    <Card class="my-4" :itemsData="itemsData" :type="typeName" />
-    <!-- card -->
-
+    <b-container>
+      <div class="my-4 title">
+        <h4>查詢結果</h4>
+      </div>
+      <!-- card -->
+      <Card class="my-4" :itemsData="itemsData" :type="typeName" />
+      <!-- card -->
+    </b-container>
   </div>
 </template>
 
@@ -157,9 +159,37 @@ export default {
   min-height: 50rem;
 }
 
+.title {
+  background-color: #2A48FF;
+}
+
+.title h4 {
+  background-color: #F1F1F1;
+  text-align: left;
+  margin-left: 5px;
+  padding-left: 5px;
+  font-size: 20px;
+  letter-spacing: 0.32px;
+  color: #2C2C2C;
+}
+
+.carousel-item img{
+  width: 100%;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
 .carousel-content {
+  margin-top: 6rem;
   position: absolute;
   z-index: 1;
+}
+
+@media only screen and (min-width: 525px) {
+  .carousel-content {
+    margin-top: 4rem;
+    position: absolute;
+  }
 }
 
 .carousel-content h1{

@@ -6,7 +6,6 @@
     <b-carousel
       class="d-none d-lg-block"
       id="carousel-fade"
-      style="text-shadow: 0px 0px 2px #000"
       fade
       :interval=0
     >
@@ -23,41 +22,41 @@
 
     </b-carousel>
     <!-- carousel -->
+    <b-container>
+      <b-row class="px-5 py-4" cols="1" cols-md="1" cols-lg="2">
+        <b-col>
 
-    <b-row class="px-5 py-4" cols="1" cols-md="1" cols-lg="2">
-      <b-col>
+        </b-col>
 
-      </b-col>
+        <b-col>
+          <b-card v-if="item != null" :title="item.Name">
+            
+            <b-card-sub-title class="mt-4 map">
+              <b-icon class="mr-2" icon="geo-alt-fill"></b-icon>
+              <a :href="getMap(item.Address)" target="_blank"><u>{{ item.City }}</u></a>
+            </b-card-sub-title>
 
-      <b-col>
-        <b-card v-if="item != null" :title="item.Name">
-          
-          <b-card-sub-title class="mt-4 map">
-            <b-icon class="mr-2" icon="geo-alt-fill"></b-icon>
-            <a :href="getMap(item.Address)" target="_blank"><u>{{ item.City }}</u></a>
-          </b-card-sub-title>
+            <b-card-sub-title class="mt-4"><b-icon class="mr-2" icon="tag"></b-icon>標籤</b-card-sub-title>
+            <b-card-text class="pt-2 px-4">
+              <b-badge v-if="item[`Class1`] == null" variant="secondary" class="m-1">未分類</b-badge>
+              <b-badge v-for="n in 3" :key="n" variant="secondary" class="m-1">{{ item[`Class${n}`] }}</b-badge>
+            </b-card-text>
 
-          <b-card-sub-title class="mt-4"><b-icon class="mr-2" icon="tag"></b-icon>標籤</b-card-sub-title>
-          <b-card-text class="pt-2 px-4">
-            <b-badge v-if="item[`Class1`] == null" variant="secondary" class="m-1">未分類</b-badge>
-            <b-badge v-for="n in 3" :key="n" variant="secondary" class="m-1">{{ item[`Class${n}`] }}</b-badge>
-          </b-card-text>
-
-          <b-card-sub-title class="mt-4"><b-icon class="mr-2" icon="clock"></b-icon>開放時間</b-card-sub-title>
-          <b-card-text class="pt-2 px-4">{{ item.OpenTime }}</b-card-text>
+            <b-card-sub-title class="mt-4"><b-icon class="mr-2" icon="clock"></b-icon>開放時間</b-card-sub-title>
+            <b-card-text class="pt-2 px-4">{{ item.OpenTime }}</b-card-text>
 
 
-          <b-card-sub-title class="mt-4"><b-icon class="mr-2" icon="file-earmark-medical"></b-icon>簡介</b-card-sub-title>
-          <b-card-text class="pt-2 px-4">{{ item.Description }}</b-card-text>
+            <b-card-sub-title class="mt-4"><b-icon class="mr-2" icon="file-earmark-medical"></b-icon>簡介</b-card-sub-title>
+            <b-card-text class="pt-2 px-4">{{ item.Description }}</b-card-text>
 
-          <b-row class="m-2 mt-4">
-            <b-col class="px-1 my-1" cols="12" xl="5"><b-button block variant="outline-danger" size="lg" :href=getPhone(item.Phone)><b-icon class="mr-2 mb-1" icon="telephone-fill"></b-icon>{{ item.Phone }}</b-button></b-col>
-            <b-col class="px-1 my-1" cols="12" xl="5"><b-button block :disabled=getWebsiteUrl(item.WebsiteUrl) variant="danger" size="lg" :href="item.WebsiteUrl" target="_blank">官方網站</b-button></b-col>
-          </b-row>
-        </b-card>
-      </b-col>
-    </b-row>
-
+            <b-row class="m-2 mt-4">
+              <b-col class="px-1 my-1" cols="12" xl="5"><b-button block variant="outline-danger" size="lg" :href=getPhone(item.Phone)><b-icon class="mr-2 mb-1" icon="telephone-fill"></b-icon>{{ item.Phone }}</b-button></b-col>
+              <b-col class="px-1 my-1" cols="12" xl="5"><b-button block :disabled=getWebsiteUrl(item.WebsiteUrl) variant="danger" size="lg" :href="item.WebsiteUrl" target="_blank">官方網站</b-button></b-col>
+            </b-row>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

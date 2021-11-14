@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-    <b-container>
     <NavBar />
-
     <div class="week01">
       <router-view/>
     </div>
-
-    </b-container>
     <Footer />
   </div>
 </template>
