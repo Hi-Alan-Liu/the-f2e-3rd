@@ -1,11 +1,12 @@
 {
-  "name": "the-f2e-3rd-projects",
+  "name": "the-f2e-3rd",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "npm run build && sh deploy.sh prod"
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
