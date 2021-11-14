@@ -88,9 +88,15 @@ export default {
   font-size: 15px;
 }
 
-.card .card-body span{
+.card .card-body span {
   padding: 8px 8px 6px 8px;
   font-size: 12px;
+}
+
+.card .card-body h4 {
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .btn-sm {
