@@ -11,7 +11,7 @@
       img-height="360"
       @sliding-end="onSlideEnd"
     >
-      <b-carousel-slide v-for="n in backgrounds" :key="n">
+      <b-carousel-slide v-for="(n, index) in backgrounds" :key="index">
         <template v-slot:img>
           <img class="d-block" height="360" :src=n.src>
         </template>
@@ -37,23 +37,20 @@
           </b-row>
           <b-row class="mx-4 mt-3 px-3">
             <b-col cols="5">
-              <b-form-input list="my-list-id" size="lg"></b-form-input>
+              <b-form-input list="cities" v-model="searchCity" size="lg" placeholder="輸入想去的地點"></b-form-input>
               
-              <b-icon icon="x" />
-              <datalist id="my-list-id">
-                <option v-for="city in citys" :key="city.text">{{ city.value }}</option>
+              <datalist id="cities">
+                <option v-for="(city, index) in cities" :key="index">{{ city.value }}</option>
               </datalist>
             </b-col>
             <b-col cols="4">
-              <b-form-input v-model="text" placeholder="輸入景點名稱" size="lg"></b-form-input>
+              <b-form-input v-model="searchText" placeholder="輸入景點名稱" size="lg"></b-form-input>
             </b-col> 
             <b-col>
-              <b-button class="search-button px-4" variant="danger" size="lg"><b-icon class="mr-2" icon="search"></b-icon>搜尋</b-button>
+              <b-button @click="clickSearcButton" class="search-button px-4" variant="danger" size="lg"><b-icon class="mr-2" icon="search"></b-icon>搜尋</b-button>
             </b-col>
           </b-row>
         </div>
-
-
       </div>
 
     </b-carousel>
@@ -82,7 +79,7 @@ export default {
         { src : require('@/assets/week01/03-background.png') },
         { src : require('@/assets/week01/04-background.png') }                
       ],
-      citys: [
+      cities: [
         { value: "臺北市", text: "臺北市" },
         { value: "新北市", text: "新北市" },
         { value: "桃園市", text: "桃園市" },
@@ -105,7 +102,9 @@ export default {
         { value: "基隆市", text: "基隆市" },
         { value: "新竹市", text: "新竹市" },
         { value: "嘉義市", text: "嘉義市" },
-      ]
+      ],
+      searchCity: null,
+      searchText: ""
     }
   },
   mounted () {
@@ -117,12 +116,17 @@ export default {
       let name = this.typeName;
       console.log(`${name}`);
       let api_url = 'https://ptx.transportdata.tw/MOTC/v2/Tourism';
+      let filter = 'Picture/PictureUrl1 ne null and Address ne null and City ne null'
+      if (this.searchCity != null) {
+        filter += ` and city eq '${this.searchCity}'`
+      }
+      console.log(filter);
       axios({
         methods: 'get',
         url: `${api_url}/${name}`,
         params: {
           // "$select": "name",
-          "$filter": "Picture/PictureUrl1 ne null and Address ne null",
+          "$filter": filter,
           "$top": 50,
         }
       })
@@ -144,6 +148,11 @@ export default {
     },
     onSlideEnd() {
       this.getItems();
+    },
+    clickSearcButton() {
+      this.getItems();
+      console.log(`${this.searchCity}`);
+      console.log(`${this.searchText}`);
     }
   },
   components: {

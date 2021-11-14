@@ -11,7 +11,7 @@
             </div>
             <b-card-body style="border-radius 0.75rem;">
               <b-card-title class="my-1 ">{{ item.Name }}</b-card-title>
-              <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.Address.slice(0, 3) }}</u></b-card-sub-title>
+              <b-card-sub-title class="my-2"><b-icon class="mx-1" icon="geo-alt-fill"></b-icon><u>{{ item.City }}</u></b-card-sub-title>
               <b-card-text>
                 <b-badge v-if="item[`Class1`] == null" variant="secondary" class="m-1">未分類</b-badge>
                 <b-badge v-for="n in 3" :key="n" variant="secondary" class="m-1">{{ item[`Class${n}`] }}</b-badge>
@@ -48,7 +48,8 @@ export default {
   border-radius: 0.75rem;
   text-align: left;
   overflow: hidden;
-  box-shadow: 0px 3px 6px #00000029;
+  border:2px #ffffff00 solid;
+  background-color: #F1F1F1;
 }
 
 .card .image-box {
@@ -76,6 +77,7 @@ export default {
 .card .card-body {
   padding: 0.75rem 1.25rem;
   min-height: 120px;
+  background-color: #FFFFFF;
 }
 
 .card .card-body h6 {
@@ -99,8 +101,7 @@ export default {
 }
 
 .card:hover {
-  background: #fff;
-  box-shadow: 0 8px 16px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  border:2px red solid;
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
