@@ -83,6 +83,7 @@ export default {
 .card .card-body h6 {
   color: #007bff !important;
 }
+
 .card .card-body svg {
   margin-bottom: 5px;
   font-size: 15px;

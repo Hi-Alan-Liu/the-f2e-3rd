@@ -62,6 +62,7 @@
 
 <script>
 import axios from 'axios'
+import JsSHA from 'jssha'
 export default {
   props: {
     name: {
@@ -90,9 +91,9 @@ export default {
         methods: 'get',
         url: `${api_url}/${type}`,
         params: {
-          // "$select": "name",
           "$filter": filter,
-        }
+        },
+        headers: this.getAuthorizationHeader(),
       })
       .then((resp) => {
         this.item = resp.data[0];
@@ -110,7 +111,19 @@ export default {
       } else {
         return true
       }
-    }
+    },
+    getAuthorizationHeader () {
+      // API 驗證
+      const AppID = "009d6fd80cce4642a061562712f36d99"
+      const AppKey = "j-nAlULKegLcabqsPt-AYAQskw8"
+      const GMTString = new Date().toGMTString()
+      const ShaObj = new JsSHA('SHA-1', 'TEXT')
+      ShaObj.setHMACKey(AppKey, 'TEXT')
+      ShaObj.update('x-date: ' + GMTString)
+      const HMAC = ShaObj.getHMAC('B64')
+      const Authorization = `hmac username="${AppID}", algorithm="hmac-sha1", headers="x-date", signature="${HMAC}"`
+      return { Authorization: Authorization, 'X-Date': GMTString }
+    },
   }
 }
 </script>
@@ -144,6 +157,14 @@ export default {
   .container {
     margin-top: 3rem;
   }
+}
+
+.item img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center center !important;
+  width: 100%;
+  border-radius: 0.75rem;
 }
 
 .card {
