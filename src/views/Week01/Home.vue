@@ -11,36 +11,38 @@
     >
       <b-carousel-slide v-for="(n, index) in backgrounds" :key="index">
         <template v-slot:img>
-          <img class="d-block" height="360" :src=n.src>
+          <img class="d-block" height="380" :src=n.src>
         </template>
       </b-carousel-slide>
 
-      <b-container>
+
         <div class="carousel-content">
-          <h1 class="mx-5">景點</h1>
-          <b-row class="mx-5 type-button">
-            <b-button class="mx-2" pill @click="clickTypeButton(0)" :variant="this.typeButton(0)">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
-            <b-button class="mx-2" pill @click="clickTypeButton(1)" :variant="this.typeButton(1)">餐飲<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
-            <b-button class="mx-2" pill @click="clickTypeButton(2)" :variant="this.typeButton(2)">旅宿<b-icon class="ml-2" icon="house-fill"></b-icon></b-button>
-            <b-button class="mx-2" pill @click="clickTypeButton(3)" :variant="this.typeButton(3)">活動<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+          <h1 class="mx-3">景點</h1>
+          <b-row class="mx-3 type-button">
+            <b-button class="mx-2 mt-2" pill @click="clickTypeButton(0)" :variant="this.typeButton(0)">景點<b-icon class="ml-2" icon="camera-fill"></b-icon></b-button>
+            <b-button class="mx-2 mt-2" pill @click="clickTypeButton(1)" :variant="this.typeButton(1)">餐飲<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
+            <b-button class="mx-2 mt-2" pill @click="clickTypeButton(2)" :variant="this.typeButton(2)">旅宿<b-icon class="ml-2" icon="house-fill"></b-icon></b-button>
+            <b-button class="mx-2 mt-2" pill @click="clickTypeButton(3)" :variant="this.typeButton(3)">活動<b-icon class="ml-2" icon="geo-alt-fill"></b-icon></b-button>
           </b-row>
-          <b-row class="mx-4 mt-3 px-3">
-            <b-col cols="5">
-              <b-form-input list="cities" v-model="searchCity" size="lg" placeholder="輸入想去的地點"></b-form-input>
-              
-              <datalist id="cities">
-                <option v-for="(city, index) in cities" :key="index">{{ city.value }}</option>
-              </datalist>
-            </b-col>
-            <b-col cols="4">
-              <b-form-input v-model="searchText" placeholder="輸入景點名稱" size="lg"></b-form-input>
-            </b-col> 
-            <b-col>
-              <b-button @click="clickSearcButton" class="search-button px-4" variant="danger" size="lg"><b-icon class="mr-2" icon="search"></b-icon>搜尋</b-button>
-            </b-col>
-          </b-row>
+          <div class="d-none d-lg-block">
+            <b-row class="mt-3 px-4">
+              <b-col cols="5">
+                <b-form-input list="cities" v-model="searchCity" size="lg" placeholder="輸入想去的地點"></b-form-input>
+                
+                <datalist id="cities">
+                  <option v-for="(city, index) in cities" :key="index">{{ city.value }}</option>
+                </datalist>
+              </b-col>
+              <b-col cols="4">
+                <b-form-input v-model="searchText" placeholder="輸入景點名稱" size="lg"></b-form-input>
+              </b-col> 
+              <b-col>
+                <b-button @click="clickSearcButton" class="search-button px-4" variant="danger" size="lg"><b-icon class="mr-2" icon="search"></b-icon>搜尋</b-button>
+              </b-col>
+            </b-row>
+          </div>
         </div>
-      </b-container>
+
 
     </b-carousel>
     <!-- carousel -->
@@ -57,7 +59,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import JsSHA from 'jssha'
 import Card from '@/components/Week01/Card.vue'
 export default {
   data() {
@@ -146,7 +148,19 @@ export default {
       this.getItems();
       console.log(`${this.searchCity}`);
       console.log(`${this.searchText}`);
-    }
+    },
+    getAuthorizationHeader () {
+      // API 驗證
+      const AppID = "009d6fd80cce4642a061562712f36d99"
+      const AppKey = "j-nAlULKegLcabqsPt-AYAQskw8"
+      const GMTString = new Date().toGMTString()
+      const ShaObj = new JsSHA('SHA-1', 'TEXT')
+      ShaObj.setHMACKey(AppKey, 'TEXT')
+      ShaObj.update('x-date: ' + GMTString)
+      const HMAC = ShaObj.getHMAC('B64')
+      const Authorization = `hmac username="${AppID}", algorithm="hmac-sha1", headers="x-date", signature="${HMAC}"`
+      return { Authorization: Authorization, 'X-Date': GMTString }
+    },
   },
   components: {
     Card
@@ -180,14 +194,17 @@ export default {
 }
 
 .carousel-content {
+  margin-left: 10%;
+  width: 75%;
   margin-top: 6rem;
   position: absolute;
   z-index: 1;
 }
 
-@media only screen and (min-width: 525px) {
+@media only screen and (min-width: 1400px) {
   .carousel-content {
-    margin-top: 4rem;
+    margin-left: 15rem;
+    margin-top: 8rem;
     position: absolute;
   }
 }
