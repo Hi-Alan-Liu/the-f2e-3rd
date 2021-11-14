@@ -70,10 +70,10 @@ export default {
       name: ["ScenicSpot", "Restaurant", "Hotel", "Activity"],
       itemsData: [],
       backgrounds: [
-        { src : require('@/assets/week01/01-background.png') },
-        { src : require('@/assets/week01/02-background.png') },
-        { src : require('@/assets/week01/03-background.png') },
-        { src : require('@/assets/week01/04-background.png') }                
+        { src : require('@/assets/week01/ScenicSpot-background.png') },
+        { src : require('@/assets/week01/Restaurant-background.png') },
+        { src : require('@/assets/week01/Hotel-background.png') },
+        { src : require('@/assets/week01/Activity-background.png') }                
       ],
       cities: [
         { value: "臺北市", text: "臺北市" },

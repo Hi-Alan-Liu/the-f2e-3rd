@@ -12,7 +12,7 @@
 
       <b-carousel-slide>
         <template v-slot:img>
-          <img class="d-block" height="170" src="@/assets/week01/02-background.png">
+          <img class="d-block" height="200" :src="img">
         </template>
       </b-carousel-slide>
 
@@ -24,8 +24,8 @@
     <!-- carousel -->
     <b-container>
       <b-row class="px-5 py-4" cols="1" cols-md="1" cols-lg="2">
-        <b-col>
-
+        <b-col class="item">
+          <img :src='item["Picture"]["PictureUrl1"]'/>
         </b-col>
 
         <b-col>
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       item: null,
+      img: require(`@/assets/week01/${this.type}-background.png`)
     }
   },
   mounted () {
@@ -138,8 +139,14 @@ export default {
   color: #FFFFFF;
   text-shadow: 0px 3px 6px #00000029;
   line-height: 80px;
-  margin-top: 4rem;
-  padding-left: 6rem;
+  margin-top: 5rem;
+  padding-left: 15%;
+}
+
+@media (max-width: 976px){
+  .container {
+    margin-top: 3rem;
+  }
 }
 
 .card {
