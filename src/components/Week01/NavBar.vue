@@ -2,14 +2,14 @@
   <b-navbar v-if="scrollTop" style="background-color: transparent !important;">
     <b-container>
       <b-navbar-brand>
-        <router-link to="/"><img alt="Vue logo" src="@/assets/week01/icon_logo.png"></router-link>
+        <router-link to="/week"><img alt="Vue logo" src="@/assets/week01/icon_logo.png"></router-link>
       </b-navbar-brand>
     </b-container>
   </b-navbar>
   <b-navbar v-else toggleable="sm" type="light" variant="light">
     <b-container>
       <b-navbar-brand>
-        <router-link to="/"><img alt="Vue logo" src="@/assets/week01/blue_icon_logo.png"></router-link>
+        <router-link to="/week"><img alt="Vue logo" src="@/assets/week01/blue_icon_logo.png"></router-link>
       </b-navbar-brand>
     </b-container>
   </b-navbar>

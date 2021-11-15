@@ -37,8 +37,7 @@ export default {
   },
   methods: {
     getUrl(name) {
-      return `/${this.type}/${name}`
-      // return `/week01/${this.type}/${name}`
+      return `/week01/${this.type}/${name}`
     }
   }
 }
