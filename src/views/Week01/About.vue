@@ -50,7 +50,7 @@
             <b-card-text class="pt-2 px-4">{{ item.Description }}</b-card-text>
 
             <b-row class="m-2 mt-4">
-              <b-col class="px-1 my-1" cols="12" xl="5"><b-button block variant="outline-danger" size="lg" :href=getPhone(item.Phone)><b-icon class="mr-2 mb-1" icon="telephone-fill"></b-icon>{{ item.Phone }}</b-button></b-col>
+              <b-col class="px-1 my-1" cols="12" xl="5"><b-button block :disabled=phoneIsNull(item.Phone) variant="outline-danger" size="lg" :href=getPhone(item.Phone)><b-icon class="mr-2 mb-1" icon="telephone-fill"></b-icon>{{ item.Phone }}</b-button></b-col>
               <b-col class="px-1 my-1" cols="12" xl="5"><b-button block :disabled=getWebsiteUrl(item.WebsiteUrl) variant="danger" size="lg" :href="item.WebsiteUrl" target="_blank">官方網站</b-button></b-col>
             </b-row>
           </b-card>
@@ -107,6 +107,13 @@ export default {
     },
     getWebsiteUrl(url) {
       if (url != null) {
+        return false
+      } else {
+        return true
+      }
+    },
+    phoneIsNull(phone) {
+      if (phone != null) {
         return false
       } else {
         return true
