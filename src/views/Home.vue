@@ -9,7 +9,7 @@
         <b-badge class="m-1" variant="success">VUE初心者</b-badge>
         <b-list-group class="mt-3">
           <b-list-group-item variant="light" href="#/Week01/">Week 1 - 台灣旅遊景點導覽</b-list-group-item>
-          <b-list-group-item variant="light" disabled href="#/Week02/">Week 2 - 自行車道地圖資訊整合網</b-list-group-item>
+          <b-list-group-item variant="light" href="#/Week02/">Week 2 - 自行車道地圖資訊整合網</b-list-group-item>
           <b-list-group-item variant="light" disabled href="#/Week03/">Week 3 - 全台公車動態時刻查詢應用服務</b-list-group-item>
         </b-list-group>
       </b-card>
