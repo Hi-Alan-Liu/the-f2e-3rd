@@ -2,9 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AppLayout from '@/layouts/App.vue';
 import Week01Layout from '@/layouts/Week01/Layout.vue';
+import Week02Layout from '@/layouts/Week02/Layout.vue';
 import Home from '@/views/Home.vue'
 import Week01Home from '@/views/Week01/Home.vue'
 import Week01About from '@/views/Week01/About.vue'
+import Week02Home from '@/views/Week02/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,19 +19,11 @@ const routes = [
         path: '',
         component: Home,
         meta: {
-          title: '台灣旅遊景點導覽'
+          title: 'Alan - The F2E 3rd'
         }
       },
     ],
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
   {
     path: '/Week01',
     name: 'Home',
@@ -58,7 +52,21 @@ const routes = [
         }
       }
     ]
-  }
+  },
+  {
+    path: '/Week02',
+    name: 'Home',
+    component: Week02Layout,
+    children: [
+      {
+        path: '',
+        component: Week02Home,
+        meta: {
+          title: '自行車道地圖資訊整合網'
+        }
+      },
+    ],
+  },
 ]
 
 const router = new VueRouter({
