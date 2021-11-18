@@ -125,7 +125,7 @@ export default {
           "$filter": filter,
           "$top": 48,
         },
-         headers: this.getAuthorizationHeader(),
+        headers: this.getAuthorizationHeader(),
       })
       .then((resp) => {
         this.itemsData = resp.data
